@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
-import java.util.List;
 
 @SpringBootApplication
 public class FitnessBoutiqueApplication {
@@ -18,52 +18,75 @@ public class FitnessBoutiqueApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(InventoryRepository inventoryRepo, MongoTemplate mongoTemplate) {
+	CommandLineRunner runner(InventoryRepository inventoryRepo, MongoTemplate mongoTemplate, WarehouseRepository warehouseRepository) {
 		return args -> {
+
+			//Feature 1: Create warehouses/locations
+
 			Warehouse warehouse = new Warehouse(
-					"TDot",
-					"Canada",
-					"Toronto"
+					"Fine Imports Warehouse",
+					"Canada"
+			);
+			Warehouse warehouseTwo = new Warehouse(
+					"Shifaa Nutrition Warehouse",
+					"USA"
 			);
 
-			String productNumber = "12345";
 
 			Inventory inventory = new Inventory(
 					"Contour Wide Leg Pants",
 					"$40",
-					productNumber,
+					"123",
 					Category.CLOTHING,
 					warehouse
 
 			);
 
-			// usingMongoTemplateAndQuery(inventoryRepo, mongoTemplate, productNumber, inventory);
-			inventoryRepo.findInventoryByProductName(productNumber)
-					.ifPresentOrElse(s -> System.out.println(s + " is over the stock quantity"), () -> {System.out.println("Inserting inventory " + inventory);
-						inventoryRepo.insert(inventory);
-					});
+			Inventory inventoryTwo = new Inventory(
+					"Chocolate Halal Protein Powder",
+					"$50",
+					"502",
+					Category.NUTRITION,
+					warehouseTwo
+
+			);
+
+
+			//READ
+			//SAVE - INSERT
+			//TODO - set this to a var
+			//inventoryRepo.insert(inventory);
+			//inventoryRepo.insert(inventoryTwo);
+			System.out.println(inventoryRepo.findAll());
+
+
+			//UPDATE
+			Query query = new Query();
+			query.addCriteria(Criteria.where("productNumber").is("123"));
+			Update update = new Update();
+			update.set("productNumber", "153");
+			mongoTemplate.updateFirst(query, update, Inventory.class);
+
+
+			//DELETE
+			//TODO - delete an inventory
+			inventoryRepo.deleteById("627ffac1710c144fa7b42059");
+			//TODO - do another read
+			System.out.println(inventoryRepo.findAll());
+
+
+			//inventory (t-shirts, multi-vitamins, protein powder, pants)
+			//warehouse (nutrition warehouse, clothing warehouses)
+
+
+			//TODO - assign inventory to specific locations
+//			inventoryRepo.findInventoryById("627ffac1710c144fa7b42059");
+
+
+
 		};
+
 	}
-
-	private void usingMongoTemplateAndQuery(InventoryRepository inventoryRepo, MongoTemplate mongoTemplate, String productNumber, Inventory inventory) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("productNumber").is(productNumber));
-
-		List<Inventory> items = mongoTemplate.find(query, Inventory.class);
-
-		if(items.size() > 100) {
-			throw new IllegalStateException(
-					"Not enough quantity of " + productNumber);
-		}
-
-		if(items.isEmpty()) {
-			System.out.println("Inserting inventory " + inventory);
-			inventoryRepo.insert(inventory);
-		} else {
-			System.out.println(inventory + " is over the stock quantity");
-		}
-	}
-
 }
 
 
