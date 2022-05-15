@@ -3,8 +3,8 @@
 # Getting Started
 Instructions for running the application from Replit: 
 
-1. Click the run button located at https://replit.com/join/mvibpmtxat-syednu
-
+1. In the run command bar enter this command ```./mvnw spring-boot:run```
+2. Then click the run button located at https://replit.com/join/mvibpmtxat-syednu
 
 
 ### Reference Documentation
