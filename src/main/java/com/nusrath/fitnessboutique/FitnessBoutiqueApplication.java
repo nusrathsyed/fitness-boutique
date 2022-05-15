@@ -107,7 +107,7 @@ public class FitnessBoutiqueApplication {
 			System.out.println("List of all remaining inventory ");
 			System.out.println(inventoryRepo.findAll());
 		};
-			
+
 	}
 }
 
