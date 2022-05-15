@@ -18,18 +18,21 @@ public class FitnessBoutiqueApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(InventoryRepository inventoryRepo, MongoTemplate mongoTemplate, WarehouseRepository warehouseRepository) {
+	CommandLineRunner runner(InventoryRepository inventoryRepo, MongoTemplate mongoTemplate, WarehouseRepository warehouseRepo) {
 		return args -> {
 
-			//Feature 1: Create warehouses/locations
 
 			Warehouse warehouse = new Warehouse(
-					"Fine Imports Warehouse",
+					"Fine Fabrics",
 					"Canada"
 			);
 			Warehouse warehouseTwo = new Warehouse(
 					"Shifaa Nutrition Warehouse",
 					"USA"
+			);
+			Warehouse warehouseThree = new Warehouse(
+					"A&Z Warehouse",
+					"UK"
 			);
 
 
@@ -50,42 +53,59 @@ public class FitnessBoutiqueApplication {
 					warehouseTwo
 
 			);
+			Inventory inventoryThree = new Inventory(
+					"Oversize Long sleeve Top",
+					"$25",
+					"150",
+					Category.CLOTHING,
+					warehouseThree
 
+			);
+			Inventory inventoryFour = new Inventory(
+					"Vegan Multivitamin Gummies",
+					"$40",
+					"601",
+					Category.NUTRITION,
+					warehouseTwo
+
+			);
+
+			//CREATE Inventory Items
+			inventoryRepo.insert(inventory);
+			inventoryRepo.insert(inventoryTwo);
+			inventoryRepo.insert(inventoryThree);
+			inventoryRepo.insert(inventoryFour);
+
+			//CREATE Warehouses/locations and assign inventory to specific locations
+			warehouseRepo.insert(warehouse);
+			warehouseRepo.insert(warehouseTwo);
+			warehouseRepo.insert(warehouseThree);
 
 			//READ
-			//SAVE - INSERT
-			//TODO - set this to a var
-			//inventoryRepo.insert(inventory);
-			//inventoryRepo.insert(inventoryTwo);
+			System.out.println("List all inventory items");
 			System.out.println(inventoryRepo.findAll());
+
+			System.out.println("List all warehouses");
+			System.out.println(warehouseRepo.findAll());
 
 
 			//UPDATE
 			Query query = new Query();
-			query.addCriteria(Criteria.where("productNumber").is("123"));
+			query.addCriteria(Criteria.where("price").is("$40"));
 			Update update = new Update();
-			update.set("productNumber", "153");
+			update.set("price", "$35");
 			mongoTemplate.updateFirst(query, update, Inventory.class);
-
-
-			//DELETE
-			//TODO - delete an inventory
-			inventoryRepo.deleteById("627ffac1710c144fa7b42059");
-			//TODO - do another read
 			System.out.println(inventoryRepo.findAll());
 
 
-			//inventory (t-shirts, multi-vitamins, protein powder, pants)
-			//warehouse (nutrition warehouse, clothing warehouses)
 
-
-			//TODO - assign inventory to specific locations
-//			inventoryRepo.findInventoryById("627ffac1710c144fa7b42059");
-
-
-
+			//DELETE
+			inventoryRepo.deleteByProductNumber("601");
+			inventoryRepo.deleteByProductNumber("502");
+			System.out.println("List of all remaining inventory ");
+			System.out.println(inventoryRepo.findAll());
 		};
-
+			//TODO - delete database to make life easier
 	}
 }
 

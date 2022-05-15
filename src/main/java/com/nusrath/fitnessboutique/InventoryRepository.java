@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface InventoryRepository extends MongoRepository<Inventory, String> {
 
-    List<Inventory> findInventoryById(String id);
+
 
     List<Inventory> findAll();
 
-    void deleteById(String id);
+    void deleteByProductNumber(String productNumber);
+
+
 
 }

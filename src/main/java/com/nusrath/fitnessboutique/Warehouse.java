@@ -14,6 +14,6 @@ public class Warehouse {
 
     public Warehouse() {
 
-
+        
     }
 }
