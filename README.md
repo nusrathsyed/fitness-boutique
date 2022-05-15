@@ -3,7 +3,7 @@
 # Getting Started
 Instructions for running the application from Replit: 
 
-1. Click the run button located at https://replit.com/@syednu/homefitness-boutique
+1. Click the run button located at https://replit.com/join/mvibpmtxat-syednu
 
 
 
