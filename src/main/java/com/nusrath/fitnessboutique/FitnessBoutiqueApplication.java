@@ -71,18 +71,20 @@ public class FitnessBoutiqueApplication {
 			);
 
 			//CREATE Inventory Items
+			System.out.println("Creating Items in the inventory...");
 			inventoryRepo.insert(inventory);
 			inventoryRepo.insert(inventoryTwo);
 			inventoryRepo.insert(inventoryThree);
 			inventoryRepo.insert(inventoryFour);
 
 			//CREATE Warehouses/locations and assign inventory to specific locations
+			System.out.println("Creating Warehouse and their location...");
 			warehouseRepo.insert(warehouse);
 			warehouseRepo.insert(warehouseTwo);
 			warehouseRepo.insert(warehouseThree);
 
 			//READ
-			System.out.println("List all inventory items");
+			System.out.println("List all inventory items and assign them to specific warehouse locations");
 			System.out.println(inventoryRepo.findAll());
 
 			System.out.println("List all warehouses");
@@ -95,7 +97,7 @@ public class FitnessBoutiqueApplication {
 			Update update = new Update();
 			update.set("price", "$35");
 			mongoTemplate.updateFirst(query, update, Inventory.class);
-			System.out.println(inventoryRepo.findAll());
+			System.out.println("Edit the price of certain items " + inventoryRepo.findAll());
 
 
 
@@ -105,7 +107,7 @@ public class FitnessBoutiqueApplication {
 			System.out.println("List of all remaining inventory ");
 			System.out.println(inventoryRepo.findAll());
 		};
-			//TODO - delete database to make life easier
+			
 	}
 }
 
