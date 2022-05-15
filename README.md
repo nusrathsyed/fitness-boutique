@@ -1,9 +1,15 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.nusrath.fitness-boutique' is invalid and this project uses 'com.nusrath.fitnessboutique' instead.
+# fitness-boutique
 
 # Getting Started
+Instructions for running the application from GitHub: 
+
+1. Install Docker on your Desktop if you don't have it already https://www.docker.com/get-started/
+2. Clone this repository
+3. ```docker-commands-go-here```
+4. Run the application using `./mvnw spring-boot:run` or through your IDE
+5. Open your local browser to visualize the MongoDB Database using Mongo Express, accessing the application via the Docker service http://localhost:8081 
+
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
