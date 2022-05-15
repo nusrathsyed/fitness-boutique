@@ -1,11 +1,9 @@
-# Read Me First
-The following was discovered as part of building this project:
+# fitness-boutique
 
-* The original package name 'com.nusrath.fitness-boutique' is invalid and this project uses 'com.nusrath.fitnessboutique' instead.
+## Instructions
+Press the run button via <ENTER LINK HERE>
 
-# Getting Started
-
-### Reference Documentation
+## Reference Documentation
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -14,7 +12,7 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.7/reference/htmlsingle/#boot-features-developing-web-applications)
 * [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/2.6.7/reference/htmlsingle/#boot-features-mongodb)
 
-### Guides
+## Guides
 The following guides illustrate how to use some features concretely:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
