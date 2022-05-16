@@ -6,6 +6,8 @@ Instructions for running the application from Replit:
 1. In the run command bar enter this command ```./mvnw spring-boot:run```
 2. Then click the run button located at https://replit.com/join/mvibpmtxat-syednu
 
+*Access the master branch to run the application via Docker.
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
